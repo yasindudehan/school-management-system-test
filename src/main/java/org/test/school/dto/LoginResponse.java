@@ -13,20 +13,20 @@ import lombok.Setter;
 public class LoginResponse {
 
     @JsonProperty("access_token")
-    public String accessToken;
+    private String accessToken;
     @JsonProperty("expires_in")
-    public int expiresIn;
+    private int expiresIn;
     @JsonProperty("refresh_expires_in")
-    public int refreshExpiresIn;
+    private int refreshExpiresIn;
     @JsonProperty("refresh_token")
-    public String refreshToken;
+    private String refreshToken;
     @JsonProperty("token_type")
-    public String tokenType;
+    private String tokenType;
     @JsonProperty("not-before-policy")
-    public int notBeforePolicy;
+    private int notBeforePolicy;
     @JsonProperty("session_state")
-    public String sessionState;
-    public String scope;
+    private String sessionState;
+    private String scope;
 }
 
 
