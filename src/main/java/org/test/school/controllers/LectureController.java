@@ -1,6 +1,7 @@
 package org.test.school.controllers;
 
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
@@ -24,18 +25,21 @@ public class LectureController {
 
     @POST
     @Path("/add")
+    @RolesAllowed("ADMIN")
     public Response addLecture(@Valid LectureRequest lectureRequest) throws APIException {
         ResponseWrapper<Lecturer> responseWrapper = lectureService.addLecture(lectureRequest);
         return Response.ok(responseWrapper).build();
     }
     @GET
     @Path("/all")
+    @RolesAllowed("ADMIN")
     public Response getAllLectures(@QueryParam("page") int page, @QueryParam("size") int size) throws APIException {
         ResponseWrapper<List<Lecturer>> responseWrapper = lectureService.getAllLectures(page,size);
         return Response.ok(responseWrapper).build();
     }
     @GET
     @Path("/{id}")
+    @RolesAllowed({"ADMIN","LECTURER"})
     public Response getLectureById(@PathParam("id") int id) throws APIException {
         ResponseWrapper<Lecturer> responseWrapper = lectureService.getLectureById(id);
         return Response.ok(responseWrapper).build();

@@ -1,6 +1,7 @@
 package org.test.school.controllers;
 
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
@@ -22,6 +23,7 @@ public class MarksController {
 
     @POST
     @Path("/add")
+    @RolesAllowed({"LECTURER","ADMIN"})
     public Response addMark(MarkRequest markRequest) throws APIException {
         ResponseWrapper<Marks> responseWrapper = markService.addMark(markRequest);
         return Response.ok(responseWrapper).build();
@@ -29,6 +31,7 @@ public class MarksController {
 
     @GET
     @Path("/all")
+    @RolesAllowed({"LECTURER","ADMIN"})
     public Response getAllMarks(@QueryParam("page") int page,@QueryParam("size") int size) throws APIException {
         ResponseWrapper<List<Marks>> responseWrapper = markService.getAllMarks(page, size);
         return Response.ok(responseWrapper).build();

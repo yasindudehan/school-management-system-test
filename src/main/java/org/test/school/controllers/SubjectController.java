@@ -1,6 +1,7 @@
 package org.test.school.controllers;
 
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
@@ -23,18 +24,21 @@ public class SubjectController {
 
     @POST
     @Path("/add")
+    @RolesAllowed("ADMIN")
     public Response addSubject(@Valid SubjectRequest subjectRequest) throws APIException {
         ResponseWrapper<Subject> responseWrapper = subjectService.addSubject(subjectRequest);
         return Response.ok(responseWrapper).build();
     }
     @GET
     @Path("/all")
+    @RolesAllowed("ADMIN")
     public Response getAllSubjects(@QueryParam("page") int page, @QueryParam("size") int size) throws APIException {
         ResponseWrapper<List<Subject>> responseWrapper = subjectService.getAllSubjects(page,size);
         return Response.ok(responseWrapper).build();
     }
     @GET
     @Path("/{id}")
+    @RolesAllowed("ADMIN")
     public Response getSubjectById(@PathParam("id") int id) throws APIException {
         ResponseWrapper<Subject> responseWrapper = subjectService.getSubjectById(id);
         return Response.ok(responseWrapper).build();
