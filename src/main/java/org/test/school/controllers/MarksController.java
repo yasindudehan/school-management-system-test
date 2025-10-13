@@ -1,7 +1,6 @@
 package org.test.school.controllers;
 
 
-import io.quarkus.security.Authenticated;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
@@ -17,7 +16,7 @@ import java.util.List;
 @Path("/marks")
 @Consumes("application/json")
 @Produces("application/json")
-@Authenticated
+
 public class MarksController {
     @Inject
     MarkService markService;

@@ -1,7 +1,7 @@
 package org.test.school.controllers;
 
 
-import io.quarkus.security.Authenticated;
+
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
@@ -19,7 +19,7 @@ import java.util.List;
 @Path("/courses")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-@Authenticated
+
 public class CourseController {
 
 
