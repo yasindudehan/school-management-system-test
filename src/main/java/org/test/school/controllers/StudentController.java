@@ -1,5 +1,6 @@
 package org.test.school.controllers;
 
+import io.quarkus.security.Authenticated;
 import jakarta.annotation.security.PermitAll;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.Valid;
@@ -17,6 +18,7 @@ import java.util.List;
 @Path("/students")
 @Consumes("application/json")
 @Produces("application/json")
+@Authenticated
 public class StudentController {
 
 
