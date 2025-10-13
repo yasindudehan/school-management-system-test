@@ -70,9 +70,14 @@ Create your first JPA entity
 
 [Related Hibernate with Panache section...](https://quarkus.io/guides/hibernate-orm-panache)
 
-
 ### REST
 
 Easily start your REST Web Services
+
+
+## ER Diagram
+
+<img width="1120" height="772" alt="Screenshot 2025-10-13 124254" src="https://github.com/user-attachments/assets/6eed0fd6-bd92-4661-bdc8-3376a093f564" />
+
 
 [Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
