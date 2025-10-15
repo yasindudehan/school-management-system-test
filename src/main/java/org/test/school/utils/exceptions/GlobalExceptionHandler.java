@@ -28,6 +28,5 @@ public class GlobalExceptionHandler implements ExceptionMapper<Throwable> {
              errorResponse.setErrorCode(String.valueOf(statusCode));
              errorResponse.setMessage(message);
              return Response.status(statusCode).entity(errorResponse).build();
-
     }
 }

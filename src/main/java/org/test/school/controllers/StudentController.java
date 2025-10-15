@@ -46,4 +46,13 @@ public class StudentController {
         ResponseWrapper<Student> responseWrapper = studentService.getStudentById(id);
         return Response.ok(responseWrapper).build();
     }
+
+    @GET
+    @Path("/enroll")
+    @RolesAllowed({"ADMIN","STUDENT"})
+    public Response enrollStudent(@QueryParam("studentID") Long studentID,@QueryParam("courseID") Long courseID) throws APIException {
+        ResponseWrapper<Student> responseWrapper=studentService.enrollStudent(studentID,courseID);
+        return Response.ok(responseWrapper).build();
+    }
+
 }

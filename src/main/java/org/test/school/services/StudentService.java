@@ -6,21 +6,18 @@ import io.quarkus.panache.common.Page;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
-import org.hibernate.Transaction;
 import org.hibernate.exception.ConstraintViolationException;
 import org.test.school.dto.ResponseWrapper;
 import org.test.school.dto.StudentRequest;
+import org.test.school.repositories.models.Course;
 import org.test.school.repositories.models.Student;
 import org.test.school.repositories.repo.CourseRepository;
 import org.test.school.repositories.repo.StudentRepository;
 import org.test.school.utils.exceptions.APIException;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
-
 @ApplicationScoped
 public class StudentService {
 
@@ -63,7 +60,6 @@ public class StudentService {
                        student.setAddress(studentRequest.getAddress());
                        student.setDob(Date.valueOf(studentRequest.getDob()));
                        student.setEnrollDate(new Date(System.currentTimeMillis()));
-
                        student.setCourses(courseRepository.findByIds(studentRequest.getCourseIds()));
                        studentRepository.persist(student);
                        ResponseWrapper<Student> responseWrapper = new ResponseWrapper<>();
@@ -84,7 +80,7 @@ public class StudentService {
 
     public ResponseWrapper<Student> getStudentById(int id) throws APIException {
         try{
-            Student student = studentRepository.findById(Long.valueOf(id));
+            Student student = studentRepository.findById((long) id);
             if(Objects.nonNull(student)){
                 ResponseWrapper<Student> responseWrapper = new ResponseWrapper<>();
                 responseWrapper.setData(student);
@@ -103,4 +99,29 @@ public class StudentService {
             throw new APIException(ex.getMessage(),500);
         }
     }
+
+    public ResponseWrapper<Student> enrollStudent(Long studentID, Long courseID) throws APIException {
+        try{
+            Student student = studentRepository.findById(studentID);
+            if(Objects.isNull(student)){
+                throw new APIException("student is not found",400);
+            }
+            Course course = courseRepository.findById(courseID);
+            if(Objects.isNull(course)){
+                throw new APIException("course is not found",400);
+            }
+            student.getCourses().add(course);
+            studentRepository.persist(student);
+            ResponseWrapper<Student> responseWrapper = new ResponseWrapper<>();
+            responseWrapper.setData(student);
+            responseWrapper.setMessage("Successfully enrolled student");
+            return responseWrapper;
+        }catch (APIException ex){
+            throw ex;
+        }
+        catch (Exception ex){
+            throw new APIException("Internal Server Error",500);
+        }
+    }
 }
+

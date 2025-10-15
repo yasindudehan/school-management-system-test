@@ -3,9 +3,7 @@ package org.test.school.services;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.net.httpserver.HttpPrincipal;
 import jakarta.enterprise.context.ApplicationScoped;
-import lombok.extern.java.Log;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.test.school.dto.LoginResponse;
 import org.test.school.dto.ResponseWrapper;
